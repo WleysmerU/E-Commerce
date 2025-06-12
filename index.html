@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luumü Wayuu | Artesanía con Alma</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --main-bg: #f9f5f0;
+      --accent: #9c5c34;
+      --highlight: #ddb892;
+      --deep-earth: #3e2f1c;
+    }
+
+    body {
+      background-color: var(--main-bg);
+      color: var(--deep-earth);
+      font-family: 'Georgia', serif;
+    }
+
+    .navbar {
+      background-color: var(--highlight);
+    }
+
+    .navbar-brand, .nav-link {
+      color: var(--deep-earth) !important;
+      font-weight: bold;
+    }
+
+    .hero {
+      background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1605126142457-7fbd3c6c8cc5') center/cover no-repeat;
+      height: 75vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      text-shadow: 1px 1px 5px #000;
+    }
+
+    .product-card img {
+      height: 220px;
+      object-fit: cover;
+      border-radius: 10px 10px 0 0;
+    }
+
+    .product-card {
+      border: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .btn-earth {
+      background-color: var(--accent);
+      color: #fff;
+      border: none;
+    }
+
+    .btn-earth:hover {
+      background-color: #7a4527;
+    }
+
+    .cart {
+      position: fixed;
+      top: 90px;
+      right: 20px;
+      width: 270px;
+      background: white;
+      border: 1px solid #ddd;
+      padding: 15px;
+      z-index: 1000;
+      display: none;
+    }
+
+    .footer {
+      background-color: var(--highlight);
+      text-align: center;
+      padding: 20px;
+      color: var(--deep-earth);
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" href="#">Luumü Wayuu</a>
+    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#coleccion">Colección</a></li>
+        <li class="nav-item"><a class="nav-link" href="#historia">Nuestra Historia</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+        <li class="nav-item">
+          <button class="btn btn-earth ms-2" onclick="toggleCart()">
+            <i class="fas fa-shopping-bag"></i> (<span id="cart-count">0</span>)
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="cart" id="cart">
+  <h5>Carrito</h5>
+  <ul id="cart-items" class="list-unstyled small"></ul>
+  <p>Total: $<span id="cart-total">0</span></p>
+  <button class="btn btn-sm btn-danger" onclick="clearCart()">Vaciar</button>
+</div>
+
+<section class="hero">
+  <div>
+    <h1>Artesanía con Alma</h1>
+    <p>Tejidos de la tierra Wayuu, con historia y tradición.</p>
+  </div>
+</section>
+
+<section id="coleccion" class="py-5">
+  <div class="container">
+    <h2 class="text-center mb-4">Colección Destacada</h2>
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <div class="card product-card">
+          <img src="Imagenes/bolso_wayuu.jpg" alt="Bolso Kalü">
+          <div class="card-body">
+            <h5 class="card-title">Bolso Kalü</h5>
+            <p class="card-text">Diseño tradicional tejido por manos sabias.</p>
+            <button class="btn btn-earth" onclick="addToCart('Bolso Kalü', 95000)">Añadir</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card product-card">
+          <img src="Imagenes/aretes.jpg" alt="Aretes Jepira">
+          <div class="card-body">
+            <h5 class="card-title">Aretes Jepira</h5>
+            <p class="card-text">Inspirados en el viento de la Alta Guajira.</p>
+            <button class="btn btn-earth" onclick="addToCart('Aretes Jepira', 18000)">Añadir</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card product-card">
+          <img src="Imagenes/manta.jpg" alt="Manta Shii">
+          <div class="card-body">
+            <h5 class="card-title">Manta Shii</h5>
+            <p class="card-text">Vestimenta Wayuu con alma ancestral.</p>
+            <button class="btn btn-earth" onclick="addToCart('Manta Shii', 120000)">Añadir</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="historia" class="py-5 bg-light">
+  <div class="container text-center">
+    <h2>Nuestra Historia</h2>
+    <p>En *Luumü Wayuu*, cada pieza es una ofrenda cultural. Somos tejedoras de tiempo, guardianas de un legado milenario. Desde las comunidades de la Guajira, enviamos al mundo arte hecho a mano con amor, símbolo de resistencia y belleza.</p>
+  </div>
+</section>
+
+<section id="contacto" class="py-5">
+  <div class="container text-center">
+    <h2>Contáctanos</h2>
+    <p><i class="fas fa-envelope"></i> wleysmerusuga@gmail.com</p>
+    <p><i class="fas fa-phone"></i> +57 302 327 6809</p>
+    <div>
+      <a href="#" class="me-2"><i class="fab fa-facebook fa-lg"></i></a>
+      <a href="#" class="me-2"><i class="fab fa-instagram fa-lg"></i></a>
+      <a href="#"><i class="fab fa-whatsapp fa-lg"></i></a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <p>&copy; 2025 Luumü Wayuu. Todos los derechos reservados.</p>
+</footer>
+
+<script>
+  const cart = [];
+
+  function toggleCart() {
+    const cartEl = document.getElementById("cart");
+    cartEl.style.display = cartEl.style.display === "none" ? "block" : "none";
+  }
+
+  function addToCart(product, price) {
+    cart.push({ product, price });
+    updateCart();
+  }
+
+  function updateCart() {
+    const cartItems = document.getElementById("cart-items");
+    const cartTotal = document.getElementById("cart-total");
+    const cartCount = document.getElementById("cart-count");
+    cartItems.innerHTML = '';
+    let total = 0;
+    cart.forEach(item => {
+      const li = document.createElement("li");
+      li.textContent = `${item.product} - $${item.price}`;
+      cartItems.appendChild(li);
+      total += item.price;
+    });
+    cartTotal.textContent = total;
+    cartCount.textContent = cart.length;
+  }
+
+  function clearCart() {
+    cart.length = 0;
+    updateCart();
+  }
+
+  window.onload = () => {
+    if (localStorage.getItem('visitas')) {
+      let visitas = parseInt(localStorage.getItem('visitas'));
+      visitas++;
+      localStorage.setItem('visitas', visitas);
+    } else {
+      localStorage.setItem('visitas', 1);
+    }
+  };
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
